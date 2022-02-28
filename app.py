@@ -8,8 +8,8 @@ app = FastAPI()
 
 
 @functools.lru_cache(maxsize=1)
-def get_pipe(task: Optional[str] = None):
-    return pipeline(task)
+def get_pipeline(**kwargs):
+    return pipeline(**kwargs)
 
 
 @app.get('/')
@@ -18,12 +18,14 @@ def return_version():
         return f.read()
 
 
-@app.post('/pipeline/{task}')
-async def get_result(task: str, payload: Request):
+@app.post('/pipeline')
+async def get_result(payload: Request):
     payload = await payload.json()
+    params = payload['params']
+    input = payload['input']
     try:
-        pipe = get_pipe(task)
-        result = pipe(payload)
+        pipe = get_pipeline(**params)
+        result = pipe(input)
         return {'result': result}
     except Exception as e:
         return {'error': str(e)}
