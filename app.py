@@ -12,12 +12,18 @@ def get_pipe(task: Optional[str] = None):
     return pipeline(task)
 
 
-@app.post('/pipeline')
-async def get_result(payload: Request):
+@app.get('/')
+def return_version():
+    with open('requirements.txt') as f:
+        return f.read()
+
+
+@app.post('/pipeline/{task}')
+async def get_result(task: str, payload: Request):
     payload = await payload.json()
     try:
-        pipe = get_pipe(payload['task'])
-        result = pipe(payload['input'])
+        pipe = get_pipe(task)
+        result = pipe(payload)
         return {'result': result}
     except Exception as e:
         return {'error': str(e)}

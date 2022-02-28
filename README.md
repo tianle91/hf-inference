@@ -6,8 +6,9 @@ Just run `docker-compose up` (you'll need [docker](https://www.docker.com/produc
 The following should work:
 ```python
 >>> import requests
->>> payload = {'task': 'fill-mask', 'input': 'The goal of life is <mask>.'}
->>> requests.post('http://localhost:8000/pipeline', json=payload).json()
+>>> requests.post('http://localhost:8000/pipeline/fill-mask', json='The goal of life is <mask>.').json()
+{'error': 'string indices must be integers'}
+>>> requests.post('http://localhost:8000/pipeline/fill-mask', json='The goal of life is <mask>.').json()
 {'result': [{'score': 0.06897158920764923, 'token': 11098, 'token_str': ' happiness', 'sequence': 'The goal of life is happiness.'}, {'score': 0.06554900109767914, 'token': 45075, 'token_str': ' immortality', 'sequence': 'The goal of life is immortality.'}, {'score': 0.03235733136534691, 'token': 14314, 'token_str': ' yours', 'sequence': 'The goal of life is yours.'}, {'score': 0.024313855916261673, 'token': 22211, 'token_str': ' liberation', 'sequence': 'The goal of life is liberation.'}, {'score': 0.02376789040863514, 'token': 25342, 'token_str': ' simplicity', 'sequence': 'The goal of life is simplicity.'}]}
 ```
 The queries should be much faster after the first one.
