@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/workdir
+    entrypoint: uvicorn app:app --host 0.0.0.0
+    deploy:
+      restart_policy:
+        condition: on-failure
