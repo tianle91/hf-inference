@@ -39,7 +39,7 @@ For details on what parameters (for example, what other tasks you can run), chec
 
 
 ## GPU
-The following uses a gpu `docker-compose -f docker-compose-gpu.yaml up`.
+Running the following command would use a gpu `docker-compose -f docker-compose-gpu.yaml up`.
 Make sure you have it set up for your host machine.
 If you have Windows 11, it should be [fairly simple](https://www.docker.com/blog/wsl-2-gpu-support-for-docker-desktop-on-nvidia-gpus/), which is what I've tested this on.
 
