@@ -1,5 +1,4 @@
 import functools
-from typing import Optional
 
 from fastapi import FastAPI, Request
 from transformers import pipeline
