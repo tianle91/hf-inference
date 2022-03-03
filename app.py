@@ -6,9 +6,11 @@ from transformers import pipeline
 
 app = FastAPI()
 
-NUM_CACHED_PIPELINES = os.getenv('NUM_CACHED_PIPELINES', 1)
+NUM_CACHED_PIPELINES = os.getenv('NUM_CACHED_PIPELINES', '')
 if len(NUM_CACHED_PIPELINES) == 0:
     NUM_CACHED_PIPELINES = 1
+else:
+    NUM_CACHED_PIPELINES = int(NUM_CACHED_PIPELINES)
 
 
 @functools.lru_cache(maxsize=NUM_CACHED_PIPELINES)
