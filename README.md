@@ -25,19 +25,10 @@ payload = {
 - `input`: Inputs passed into an instantiated `pipeline`.
 - `params`: Parameters passed into a `pipeline`.
 
-
-### Example
-Let's look at an example using `pipeline` on their [page](https://huggingface.co/docs/transformers/v4.16.2/en/main_classes/pipelines#transformers.pipeline).
+These two statements should be equivalent.
 ```python
-from transformers import pipeline
-
-pipe = pipeline("text-classification")
-pipe("This restaurant is awesome")
+>>> requests.post('http://localhost:8000/pipeline', json=payload).json()
 ```
-It can be converted into a payload easily.
 ```python
-payload = {
-    'input': 'This restaurant is awesome',
-    'params': {'task': 'text-classification'}
-}
+>>> pipeline(**payload['params'])(payload['input'])
 ```
