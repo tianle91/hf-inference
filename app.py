@@ -12,6 +12,9 @@ if len(NUM_CACHED_PIPELINES) == 0:
 else:
     NUM_CACHED_PIPELINES = int(NUM_CACHED_PIPELINES)
 
+with open('requirements.txt') as f:
+    REQUIREMENTS_TXT = f.read()
+
 
 @functools.lru_cache(maxsize=NUM_CACHED_PIPELINES)
 def get_pipeline(**kwargs):
@@ -20,8 +23,7 @@ def get_pipeline(**kwargs):
 
 @app.get('/')
 def return_version():
-    with open('requirements.txt') as f:
-        return f.read()
+    return REQUIREMENTS_TXT
 
 
 @app.post('/pipeline')
