@@ -11,6 +11,11 @@ The following should work:
 ```
 The queries should be much faster after the first one.
 
+
+## ⚠️⚠️ Caution ⚠️⚠️
+There's no security - this is intended to be deployed on a local private network.
+
+
 ## Details
 The payload json is just a wrapper around `pipeline`.
 For details, see https://huggingface.co/docs/transformers/v4.16.2/en/main_classes/pipelines#transformers.pipeline
@@ -27,8 +32,9 @@ payload = {
 
 These two statements should be equivalent.
 ```python
->>> requests.post('http://localhost:8000/pipeline', json=payload).json()
+>>> requests.post('http://localhost:8000/pipeline', json=payload).json()['result']
 ```
 ```python
 >>> pipeline(**payload['params'])(payload['input'])
 ```
+
