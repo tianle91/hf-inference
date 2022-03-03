@@ -11,6 +11,11 @@ The following should work:
 ```
 The queries should be much faster after the first one.
 
+## GPU
+The following uses a gpu `docker-compose -f docker-compose-gpu.yaml up`.
+Make sure you have it set up for your host machine.
+If you have Windows 11, it should be [fairly simple](https://www.docker.com/blog/wsl-2-gpu-support-for-docker-desktop-on-nvidia-gpus/), which is what I've tested this on.
+
 
 ## ⚠️⚠️ Caution ⚠️⚠️
 There's no security - this is intended to be deployed on a local private network.
