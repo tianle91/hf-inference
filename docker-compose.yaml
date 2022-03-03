@@ -9,7 +9,7 @@ services:
       - .:/workdir
     environment:
       - NUM_CACHED_PIPELINES=${NUM_CACHED_PIPELINES}
-    entrypoint: uvicorn app:app --host 0.0.0.0
+    entrypoint: uvicorn app:app --host 0.0.0.0 --reload
     deploy:
       restart_policy:
         condition: on-failure
