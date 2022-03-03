@@ -2,6 +2,7 @@ import functools
 import os
 
 from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
 from transformers import pipeline
 
 app = FastAPI()
@@ -21,9 +22,22 @@ def get_pipeline(**kwargs):
     return pipeline(**kwargs)
 
 
-@app.get('/')
+@app.get('/', response_class=HTMLResponse)
 def return_version():
-    return REQUIREMENTS_TXT
+    return HTMLResponse(content=f'''
+    <html>
+        <head>
+            <title>HF Inference</title>
+        </head>
+        <body>
+            See
+            <a href=https://github.com/tianle91/hf-inference>tianle91/hf-inference</a>
+            for more information.
+            <h1>Requirements.txt</h1>
+            {REQUIREMENTS_TXT}
+        </body>
+    </html>
+    ''', status_code=200)
 
 
 @app.post('/pipeline')
