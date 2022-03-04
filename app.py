@@ -3,7 +3,10 @@ import os
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from transformers import pipeline
+from transformers import GPT2LMHeadModel, GPT2Tokenizer, pipeline
+
+GPT2_TOKENIZER = GPT2Tokenizer.from_pretrained('gpt2')
+GPT2_LMHEAD = GPT2LMHeadModel.from_pretrained('gpt2')
 
 app = FastAPI()
 
@@ -41,7 +44,7 @@ def return_version():
 
 
 @app.post('/pipeline')
-async def get_result(payload: Request):
+async def get_pipeline_result(payload: Request):
     payload = await payload.json()
     params = payload['params']
     input = payload['input']
@@ -49,5 +52,16 @@ async def get_result(payload: Request):
         pipe = get_pipeline(**params)
         result = pipe(input)
         return {'result': result}
+    except Exception as e:
+        return {'error': str(e)}
+
+
+@app.post('/gpt2loss')
+async def get_gpt2_loss(payload: Request):
+    payload = await payload.json()
+    try:
+        inputs = GPT2_TOKENIZER(payload, return_tensors="pt")
+        outputs = GPT2_LMHEAD(**inputs, labels=inputs["input_ids"])
+        return {'loss': str(float(outputs.loss))}
     except Exception as e:
         return {'error': str(e)}
