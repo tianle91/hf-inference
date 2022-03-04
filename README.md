@@ -55,3 +55,12 @@ If your `.env` file looks like the following then there will be `10` pipelines b
 cat .env
 NUM_CACHED_PIPELINES=10
 ```
+
+# Another endpoint
+Because it's not part of a standard pipeline and I need it.
+It just computes the loss for GPT-2.
+```python
+>>> payload ='testing a longer sentence'
+>>> requests.post('http://localhost:8000/gpt2loss', json=payload).json()
+{'loss': '6.174161434173584'}
+```
