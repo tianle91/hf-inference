@@ -1,15 +1,13 @@
 version: '3'
 services:
   app:
-    build:
-      context: .
+    image: tianlechen/hf-inference
     ports:
       - 8000:8000
-    volumes:
-      - .:/workdir
-    environment:
-      - NUM_CACHED_PIPELINES=${NUM_CACHED_PIPELINES}
-    entrypoint: uvicorn app:app --host 0.0.0.0 --reload
-    deploy:
-      restart_policy:
-        condition: on-failure
+    # # uncomment the following for gpu
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #       - driver: nvidia
+    #         capabilities: [gpu]
