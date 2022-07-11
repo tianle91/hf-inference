@@ -4,10 +4,12 @@ services:
     image: tianlechen/hf-inference
     ports:
       - 8000:8000
-    # # uncomment the following for gpu
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #       - driver: nvidia
-    #         capabilities: [gpu]
+    deploy:
+      restart_policy:
+        condition: on-failure
+      # # uncomment the following for gpu
+      # resources:
+      #   reservations:
+      #     devices:
+      #     - driver: nvidia
+      #       capabilities: [gpu]
