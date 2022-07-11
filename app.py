@@ -1,6 +1,3 @@
-import functools
-import os
-
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from transformers import GPT2LMHeadModel, GPT2Tokenizer, pipeline
