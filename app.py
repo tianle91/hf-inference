@@ -7,6 +7,7 @@ app = FastAPI()
 with open('requirements.txt') as f:
     REQUIREMENTS_TXT = f.read()
 
+
 @app.get('/', response_class=HTMLResponse)
 def return_version():
     return HTMLResponse(content=f'''
